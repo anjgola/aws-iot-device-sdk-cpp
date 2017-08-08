@@ -3,13 +3,14 @@ rsync -av include/ src/
 #Rename samples as examples
 mv samples examples
 #Create mega header file
-search_dir=src/
-for entry in "$search_dir"*; do
-  if [ ${entry: -4} == ".hpp" ]
-  then
-      echo "#include \"${entry#$search_dir}\"" >> src/aws-iot-device-sdk.h
-  fi
-done
+#search_dir=src/
+#for entry in "$search_dir"*; do
+#  if [ ${entry: -4} == ".hpp" ]
+#  then
+#      echo "#include \"${entry#$search_dir}\"" >> src/aws-iot-device-sdk-cpp.h
+#  fi
+##done
+find src -name *.hpp | sed -n 's|^src/|#include\ "|pw src/aws-iot-device-sdk-cpp.h'
 #Remove include folder
 rm -rf include/
 #Add corei7 folder to support load flags
